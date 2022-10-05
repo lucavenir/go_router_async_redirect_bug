@@ -1,7 +1,12 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final dioProvider = Provider<Dio>((ref) {
+  return Dio();
+});
 
 final authProvider = AsyncNotifierProvider<AuthNotifier, bool>(() {
   return AuthNotifier();
@@ -9,25 +14,28 @@ final authProvider = AsyncNotifierProvider<AuthNotifier, bool>(() {
 
 class AuthNotifier extends AsyncNotifier<bool> {
   AuthNotifier();
+  Dio? client;
 
   @override
   FutureOr<bool> build() async {
-    final mockedSigninResult = await Future.delayed(
-      const Duration(seconds: 1),
-      // This mocks an initial signin request coming from a saved token
-      () => Random().nextBool(),
-    );
+    client = ref.watch(dioProvider);
 
-    return mockedSigninResult;
+    final result = await client?.get(
+      'https://www.7timer.info/bin/astro.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json&tzshift=0',
+    );
+    print(result);
+
+    return Random().nextBool();
   }
 
   Future<void> signin(String email, String password) async {
     // Mocking signin requests
     state = await AsyncValue.guard(() async {
-      return Future.delayed(
-        Duration(milliseconds: Random().nextInt(750)),
-        () => true,
+      final result = await client?.get(
+        'https://www.7timer.info/bin/astro.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json&tzshift=0',
       );
+      print(result);
+      return true;
     });
   }
 
