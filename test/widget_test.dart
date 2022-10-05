@@ -9,7 +9,7 @@ void main() {
         const ProviderScope(child: App()),
       );
 
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(find.text('Loading...'), findsOneWidget);
     });
@@ -20,11 +20,11 @@ void main() {
         ),
       );
 
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(find.text('Loading...'), findsOneWidget);
 
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(find.text('Login'), findsOneWidget);
     });
