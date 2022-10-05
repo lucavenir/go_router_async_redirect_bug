@@ -13,7 +13,7 @@ class AuthNotifier extends AsyncNotifier<bool> {
   @override
   FutureOr<bool> build() async {
     final mockedSigninResult = await Future.delayed(
-      const Duration(seconds: 1),
+      const Duration(milliseconds: 50),
       // This mocks an initial signin request coming from a saved token
       () => Random().nextBool(),
     );
@@ -25,7 +25,7 @@ class AuthNotifier extends AsyncNotifier<bool> {
     // Mocking signin requests
     state = await AsyncValue.guard(() async {
       return Future.delayed(
-        Duration(milliseconds: Random().nextInt(750)),
+        const Duration(milliseconds: 50),
         () => true,
       );
     });
