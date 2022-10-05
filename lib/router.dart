@@ -33,6 +33,7 @@ class _RouterNotifier extends ChangeNotifier {
   FutureOr<String?> _redirectLogic(
     BuildContext context,
     GoRouterState state,
+    // Try removing this `async` keyword, that out-of-range error will disappear!
   ) async {
     final isLoading = ref.read(authProvider.notifier).isLoading;
     if (isLoading) return null;
