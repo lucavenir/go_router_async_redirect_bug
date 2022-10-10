@@ -11,7 +11,7 @@ class SplashPage extends ConsumerWidget {
     return const Scaffold(
       body: Center(
         child: Text(
-          'Loading...',
+          'Splash Page',
           style: TextStyle(color: Colors.black),
         ),
       ),

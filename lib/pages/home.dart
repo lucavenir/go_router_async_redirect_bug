@@ -16,7 +16,7 @@ class HomePage extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Text('Hello there..'),
+            const Text('Home Page'),
             ElevatedButton(
               onPressed: () {
                 ref.read(authProvider.notifier).signout();

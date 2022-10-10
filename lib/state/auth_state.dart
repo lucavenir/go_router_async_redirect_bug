@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,13 +11,8 @@ class AuthNotifier extends AsyncNotifier<bool> {
 
   @override
   FutureOr<bool> build() async {
-    final mockedSigninResult = await Future.delayed(
-      const Duration(milliseconds: 50),
-      // This mocks an initial signin request coming from a saved token
-      () => Random().nextBool(),
-    );
-
-    return mockedSigninResult;
+    // Initially, we are logged out.
+    return false;
   }
 
   Future<void> signin(String email, String password) async {
@@ -39,13 +33,3 @@ class AuthNotifier extends AsyncNotifier<bool> {
   bool get isAuthenticated => state.asData?.value ?? false;
   bool get isLoading => state.isLoading;
 }
-
-
-// final urlPrefixProvider = StateProvider<String>((ref) {
-//   var initialState = '';
-//   ref.onCancel(() {
-//     initialState = '';
-//   });
-
-//   return initialState;
-// });
